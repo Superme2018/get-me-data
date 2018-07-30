@@ -27,7 +27,7 @@ class GroupsController extends Controller
            $query->where("tag", $filter);
         })->with('members.messages.tags')->get();
 
-        // Will return groups, messages and form members that are flagged as active.
+        // Will return groups, messages and tags for members that are flagged as active.
         return $group->with('members')->whereHas('members.messages', function($messages) use ($filter){
             $messages->where("active", true);
         })->with('members.messages.tags')->get();
