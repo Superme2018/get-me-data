@@ -20,6 +20,7 @@ class CreateMemberMessagesTable extends Migration
 
             $table->string('title');
             $table->string('body');
+            $table->bool('active');
 
              // Relation Key.
             $table->unsignedInteger('member_id');
