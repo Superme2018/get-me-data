@@ -23,12 +23,13 @@ class GroupsController extends Controller
         // return $group->with('members')->with('members.messages')->with('members.messages.tags')->get();
 
         // Will return groups, messages and tags with members that have a specific tag.
-        return $group->with('members')->with('members.messages')->whereHas('members.messages.tags', function($query) use ($filter){
-           $query->where("tag", $filter);
+        return $group->with('members')->with('members.messages')->whereHas('members.messages.tags', function($tags) use ($filter){
+            $tags->where("tag", $filter);
         })->with('members.messages.tags')->get();
 
+
         // Will return groups, messages and tags for members that are flagged as active.
-        return $group->with('members')->whereHas('members.messages', function($messages) use ($filter){
+        return $group->with('members')->whereHas('members.messages', function($messages){
             $messages->where("active", true);
         })->with('members.messages.tags')->get();
 
